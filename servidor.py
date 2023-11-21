@@ -1,12 +1,14 @@
 import socket
 import struct
 
+
 def handle_client(client_socket):
     # Recebe os dados do cliente
     data = client_socket.recv(1024)
 
     # Decodifica os dados para um array de floats
     float_array = struct.unpack('!{}f'.format(len(data) // 4), data)
+    print('array received: ',float_array)
         #print(f'array received: {float_array}')
 
     # Calcula os valores máximo e mínimo
@@ -23,10 +25,13 @@ def handle_client(client_socket):
     response = struct.pack('!{}f'.format(len(array)), *array)
     # Envia a resposta de volta para o cliente
     client_socket.send(response)
-    print(f'max value received: {max_value}')
+
+    print(f'\nmax value received: {max_value}')
+    print(f'min value received: {min_value}')
 
     # Fecha a conexão
     client_socket.close()
+
 
 def start_server():
     # Cria um socket TCP/IP
@@ -46,6 +51,7 @@ def start_server():
 
         # Lida com a conexão em uma nova thread
         handle_client(client_socket)
+
 
 if __name__ == "__main__":
     start_server()
