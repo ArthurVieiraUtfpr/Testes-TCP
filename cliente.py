@@ -1,7 +1,9 @@
 import socket
 import struct
 
+
 def send_array_to_server(float_array):
+
     # Converte o array de floats para bytes
     data = struct.pack('!{}f'.format(len(float_array)), *float_array)
 
@@ -26,12 +28,14 @@ def send_array_to_server(float_array):
     client_socket.close()
     return max_value, min_value
 
+
 if __name__ == "__main__":
     # Exemplo de uso do cliente
     array_to_send = [3.14, 2.71, 1.618, 0.577]
+    print('array sent: ', array_to_send)
     max_value_from_server, min_value_from_server = send_array_to_server(array_to_send)
 
-    print(f"O valor minimo do array é: {min_value_from_server}")
+    print(f"\nO valor minimo do array é: {min_value_from_server}")
     print(f"O valor máximo do array é: {max_value_from_server}")
 
     # array_to_send = [3.14, 2.71, 11.618, 220.577]
