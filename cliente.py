@@ -32,11 +32,14 @@ def send_array_to_server(float_array):
 if __name__ == "__main__":
     # Exemplo de uso do cliente
     array_to_send = [3.14, 2.71, 1.618, 0.577]
+    precision = 5
     print('array sent: ', array_to_send)
     max_value_from_server, min_value_from_server = send_array_to_server(array_to_send)
-
-    print(f"\nO valor minimo do array é: {min_value_from_server}")
-    print(f"O valor máximo do array é: {max_value_from_server}")
+    #I will round the values to surpass Python's inherent imprecision of floating-point numbers
+    min_value_from_server = round(min_value_from_server, 5)
+    max_value_from_server = round(max_value_from_server, 5)
+    print(f"\nThe minium value from given array is: {min_value_from_server}")
+    print(f"The maximum value from give array is: {max_value_from_server}")
 
     # array_to_send = [3.14, 2.71, 11.618, 220.577]
     # max_value_from_server = send_array_to_server(array_to_send)
